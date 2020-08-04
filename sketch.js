@@ -1,45 +1,57 @@
-
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
-const Contraint=Matter.Constraint;
 
-var bob1,bob2,bob3,bob4,bob5;
-var st1,st2,st3,st4,st5;
-var Roof;
+var dt,dt1,crushpaper,gr,im,imim;
+
+function preload(){
+imim=loadImage("tyu.png")
+
+}
 function setup() {
 	createCanvas(800, 700);
 
-	engine = Engine.create();
+  engine = Engine.create();
 	world = engine.world;
 
-    Roof= new Box(400,350,600,10);
-    bob1= new ball(100,Roof.y+200,80);
-    bob2= new ball(200,Roof.y+200,80);
-    bob3= new ball(300,Roof.y+200,80);
-    bob4= new ball(400,Roof.y+200,80);
-    st1= new  String(Roof,bob1);
-    st2= new  String(Roof,bob2);
-    st3= new  String(Roof,bob3);
-    st4= new  String(Roof,bob4);
+	dt= new Dus(500,610,20,250)
+	dt1= new Dus(700,610,20,250)
+	dt2= new Dus(600,680,218,20)
+
+	
+  crushpaper= new Paper(100,680,50);
+ 
+
+    im=createSprite(600,580,10,10)
+    im.addImage(imim)
+    im.scale=0.7;
+
+  gr = new Dus(400,690,800,10)
 }
 
 
 function draw() {
-  background(0);
-  Engine.update(engine);
+  background(300);
+ 
+  Engine.update(engine)
+  dt.display();
+  dt1.display();
+  dt2.display();
+  crushpaper.display();
+  gr.display();
+  im.display();
+  textSize(40)
+  text("BYE BYE GARBAGE",200,200)
   drawSprites();
-  Roof.display();
-  bob1.display();
-  bob2.display();
-  bob3.display();
-  bob4.display();
-  st1.display();
-  st2.display();
-  st3.display();
-  st4.display();
 }
 
 
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+
+    Matter.Body.applyForce(crushpaper.body,crushpaper.body.position,{x:75,y:-120});
+     
+  }
+}
 
